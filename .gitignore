@@ -1,0 +1,39 @@
+# 依赖 / 构建产物
+node_modules/
+dist/
+release/
+pack-files/
+android/app/build/
+android/.gradle/
+android/local.properties
+.gradle/
+.idea/
+.vscode/
+
+# 本地数据 / 密钥
+data/
+backup/
+.pack/
+.dsh/
+.tmp/
+*.jks
+*.keystore
+*.log
+.env
+.env.*
+
+# 截图 / 安装包
+shots*/
+*.apk
+*.zip
+
+# 系统 / 本机杂物
+%SystemDrive%/
+Thumbs.db
+.DS_Store
+
+# 内部文档（不公开）
+AGENTS.md
+.plan-v1.6.md
+可行性报告.md
+安卓应用安装说明.md

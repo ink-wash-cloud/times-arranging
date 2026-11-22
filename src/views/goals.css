@@ -1,0 +1,202 @@
+/* 长远目标视图（v1.6.0）。
+   只服务待办页新增的第五个标签；样式都挂 .goal-* / .tasks-tabs*，
+   不动 styles.css 里已有的四列看板与任务行。 */
+
+/* ---------- 标签栏：前四个跳到对应列，第五个切到目标视图 ---------- */
+.tasks-tabs-row {
+  display: flex; align-items: center; gap: 8px;
+  padding-bottom: 10px; margin-bottom: 12px;
+  border-bottom: 1px solid var(--ui-line);
+}
+.tasks-tabs {
+  display: flex; align-items: center; gap: 2px;
+  min-width: 0; overflow-x: auto; scrollbar-width: none;
+}
+.tasks-tabs::-webkit-scrollbar { display: none; }
+.tasks-tab {
+  flex: 0 0 auto; border: none; background: transparent;
+  padding: 7px 11px; border-radius: var(--r-pill);
+  color: var(--dim); font-size: 13px; line-height: 1.2;
+  white-space: nowrap; cursor: pointer;
+  transition: background .18s, color .18s;
+}
+.tasks-tab:hover { background: color-mix(in srgb, var(--text) 6%, transparent); color: var(--text); }
+.tasks-tab.on {
+  background: color-mix(in srgb, var(--accent) 13%, transparent);
+  color: var(--accent-text, var(--accent)); font-weight: 600;
+}
+.tasks-tab .n {
+  margin-left: 5px; font-size: var(--fs-micro); font-weight: 500;
+  color: var(--dim-2); font-variant-numeric: tabular-nums;
+}
+.tasks-tab.on .n { color: inherit; opacity: .8; }
+.goal-new { flex: 0 0 auto; margin-left: auto; }
+.tasks-filter-row { margin-top: 12px; }
+.tasks-top.is-goals .tasks-tabs-row {
+  padding-bottom: 0; margin-bottom: 0; border-bottom: none;
+}
+.tasks-col { scroll-margin-top: 12px; }
+
+/* ---------- 目标视图两栏：左边目标，右边新建 / 已做到 ---------- */
+.goals-view {
+  display: grid; grid-template-columns: minmax(0, 1fr) 340px;
+  gap: var(--ui-gap); align-items: start;
+}
+.goals-main, .goals-side {
+  display: flex; flex-direction: column; gap: var(--ui-gap);
+  min-width: 0;
+}
+
+/* ---------- 统计卡：大数字 + 小单位 ---------- */
+.goal-stats-card {
+  display: flex; align-items: flex-end; justify-content: space-between;
+  gap: var(--sp-4); flex-wrap: wrap;
+}
+.goal-stats-card .goal-stats { flex: 1; }
+.goal-stats {
+  display: flex; align-items: flex-end; gap: var(--sp-6); flex-wrap: wrap;
+}
+.goal-stat { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
+.goal-stat-k {
+  font-size: var(--fs-cap); color: var(--dim-2); line-height: 1.4;
+}
+.goal-stat-v {
+  font-size: var(--fs-display); font-weight: 600; letter-spacing: -.4px;
+  line-height: 1.1; font-variant-numeric: tabular-nums; white-space: nowrap;
+}
+.goal-stat-v small {
+  margin-left: 4px; font-size: var(--fs-cap); font-weight: 400;
+  letter-spacing: 0; color: var(--dim-2);
+}
+.goal-stat-remind { flex: 1; min-width: 190px; }
+.goal-stat-remind .goal-stat-v {
+  font-size: var(--fs-body); font-weight: 400; letter-spacing: 0;
+  line-height: 1.5; white-space: normal;
+}
+.goal-stat-remind .goal-stat-v b { font-weight: 600; }
+.goal-stat-remind .goal-stat-v .when { color: var(--dim-2); }
+.goal-hint {
+  margin-left: auto; max-width: 190px; text-align: right;
+  font-size: var(--fs-cap); color: var(--dim-2); line-height: 1.55;
+}
+
+/* ---------- 正在推进：行与行之间一条细线，不堆卡片阴影 ---------- */
+.goal-list { padding-top: var(--sp-3); }
+.goal-list .card-h { margin-bottom: 2px; }
+.goal-list-hint { font-size: var(--fs-cap); color: var(--dim-2); margin-left: auto; }
+.goal-row { padding: 14px 0; border-top: 1px solid var(--ui-line); }
+.goal-row:first-of-type { border-top: none; padding-top: 8px; }
+.goal-row-top { display: flex; align-items: flex-start; gap: 8px; flex-wrap: wrap; }
+.goal-title {
+  font-size: 15px; font-weight: 600; letter-spacing: -.1px;
+  line-height: 1.45; margin-right: 2px; min-width: 0;
+}
+.goal-chips { display: flex; align-items: center; gap: 4px; flex-wrap: wrap; }
+.goal-chip {
+  display: inline-flex; align-items: center;
+  padding: 2px 8px; border-radius: var(--r-pill);
+  border: 1px solid var(--ui-line); color: var(--dim);
+  font-size: var(--fs-micro); font-weight: 500; white-space: nowrap;
+}
+.goal-date {
+  margin-left: auto; font-size: var(--fs-cap); color: var(--dim-2);
+  line-height: 1.6; white-space: nowrap; font-variant-numeric: tabular-nums;
+}
+.goal-progress {
+  display: flex; align-items: center; gap: 10px;
+  margin-top: 10px; flex-wrap: wrap;
+}
+.goal-progress .bar {
+  flex: 1 1 160px; height: 6px; border-radius: 999px;
+  background: color-mix(in srgb, var(--text) 8%, transparent);
+  box-shadow: none;
+}
+.goal-progress .bar > i {
+  background: var(--accent); box-shadow: none;
+}
+.goal-pct {
+  flex: 0 0 40px; text-align: right; font-size: var(--fs-cap);
+  color: var(--dim-2); font-variant-numeric: tabular-nums;
+}
+.goal-actions { display: flex; align-items: center; gap: 4px; flex: 0 0 auto; }
+.goal-milestones {
+  margin-top: 7px; font-size: var(--fs-cap); color: var(--dim); line-height: 1.55;
+}
+.goal-note {
+  margin-top: 3px; font-size: var(--fs-cap); color: var(--dim-2);
+  line-height: 1.55; white-space: pre-wrap;
+}
+
+/* ---------- 已经做到 ---------- */
+.goal-done-row {
+  display: flex; align-items: center; gap: 10px;
+  padding: 11px 2px; border-top: 1px solid var(--ui-line);
+}
+.goal-done-row:first-of-type { border-top: none; }
+.goal-done-title {
+  flex: 1; min-width: 0; font-size: var(--fs-body); color: var(--dim);
+  overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+}
+.goal-done-date {
+  flex: 0 0 auto; font-size: var(--fs-cap); color: var(--dim-2);
+  font-variant-numeric: tabular-nums;
+}
+.goal-done-row .btn { flex: 0 0 auto; }
+
+/* ---------- 新建 / 编辑表单 ---------- */
+.goal-create-card { align-self: start; }
+.goal-form { display: flex; flex-direction: column; gap: 12px; }
+.goal-form .input, .goal-form .textarea, .goal-form .select { width: 100%; }
+.goal-preset-row { display: flex; flex-wrap: wrap; gap: 4px; }
+.goal-form-note {
+  font-size: var(--fs-cap); color: var(--dim-2); line-height: 1.6;
+}
+.goal-form-actions {
+  display: flex; align-items: center; gap: 8px; margin-top: 2px;
+}
+.goal-form-actions .btn-primary { flex: 1; justify-content: center; }
+.goal-form-actions .btn-ghost { flex: 0 0 auto; }
+.goal-form .field label { font-size: var(--fs-cap); }
+.goal-form .goal-progress-edit {
+  display: flex; align-items: center; gap: 10px;
+}
+.goal-form .goal-progress-edit .bar { flex: 1; }
+.goal-form .goal-progress-edit b {
+  min-width: 42px; text-align: right; font-size: var(--fs-body);
+  font-weight: 600; font-variant-numeric: tabular-nums;
+}
+.goal-edit-extra {
+  display: flex; flex-wrap: wrap; gap: 8px;
+  margin-top: 14px; padding-top: 12px; border-top: 1px solid var(--ui-line);
+}
+.goal-edit-extra .btn { margin: 0; }
+.goal-delete { margin-left: auto; }
+
+/* ---------- 空态 ---------- */
+.goal-empty { padding: 12px 0 4px; text-align: center; }
+.goal-empty .empty { padding: 18px 0 8px; }
+.goal-empty-action { margin-top: 4px; }
+
+@media (max-width: 900px) {
+  .goals-view { grid-template-columns: minmax(0, 1fr); }
+  .goal-create-card { display: none; }
+  .goal-stats { gap: var(--sp-4); }
+  .goal-hint { margin-left: 0; max-width: none; width: 100%; text-align: left; }
+}
+
+@media (max-width: 640px) {
+  .tasks-tabs-row { align-items: flex-start; flex-wrap: wrap; row-gap: 4px; }
+  .tasks-tabs { flex: 1 1 auto; flex-wrap: wrap; overflow: visible; row-gap: 4px; }
+  .goal-date { flex-basis: 100%; margin-left: 0; }
+  .goal-progress .bar { flex-basis: 100%; order: 2; }
+  .goal-pct { order: 1; flex: 0 0 auto; margin-left: auto; }
+  .goal-actions { order: 3; flex-basis: 100%; justify-content: flex-end; margin-top: 2px; }
+  .goal-done-row { flex-wrap: wrap; }
+  .goal-done-date { margin-left: 0; }
+}
+
+@media (max-width: 480px) {
+  .goal-stats { display: grid; grid-template-columns: minmax(0, 1fr); gap: 12px; }
+  .goal-stat-v { font-size: 26px; }
+  .goal-title { font-size: 14px; }
+}

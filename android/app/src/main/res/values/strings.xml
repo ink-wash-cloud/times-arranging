@@ -1,0 +1,11 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources>
+    <string name="app_name">时序</string>
+    <string name="title_activity_main">时序</string>
+    <string name="package_name">com.shixu.schedule</string>
+    <string name="custom_url_scheme">com.shixu.schedule</string>
+    <!-- 桌面小组件。各家的叫法不一样（小组件 / 小部件 / 微件 / 桌面工具），
+         所以名字里带上"时序"，用户在选择器里一眼能找到 -->
+    <string name="widget_name">时序 · 今日待办</string>
+    <string name="widget_desc">今天的待办和课程摆在桌面上，点一下就完成，不用打开应用</string>
+</resources>

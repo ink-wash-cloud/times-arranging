@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@drawable/widget_bg"
+    android:padding="12dp">
+
+    <LinearLayout
+        android:id="@+id/widget_head"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical">
+
+        <TextView
+            android:id="@+id/widget_title"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:text="时序 · 今天"
+            android:textColor="#4B4249"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            android:maxLines="1"
+            android:ellipsize="end" />
+
+        <TextView
+            android:id="@+id/widget_sub"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="#8B7F86"
+            android:textSize="11sp"
+            android:maxLines="1" />
+    </LinearLayout>
+
+    <!-- 集合型列表：装不下时可以在小组件里上下滑 -->
+    <ListView
+        android:id="@+id/widget_list"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:layout_marginTop="7dp"
+        android:divider="@null"
+        android:dividerHeight="0dp"
+        android:scrollbars="vertical"
+        android:fadeScrollbars="true" />
+
+    <TextView
+        android:id="@+id/widget_empty"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="今天没有待办 🎉"
+        android:textColor="#8B7F86"
+        android:textSize="12sp"
+        android:paddingTop="9dp"
+        android:visibility="gone" />
+</LinearLayout>

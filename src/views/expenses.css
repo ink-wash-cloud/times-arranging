@@ -1,0 +1,410 @@
+/* 消费记录页（v1.6 线 C）。类名统一 exp- 前缀，避免和 styles.css 里的通用类打架。 */
+
+.exp-page {
+  display: flex;
+  flex-direction: column;
+  gap: var(--ui-gap, 16px);
+}
+
+.exp-top {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 292px;
+  gap: var(--ui-gap, 16px);
+  align-items: stretch;
+}
+
+.exp-summary {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--ui-gap, 16px);
+}
+
+.exp-stat {
+  padding: 15px 17px;
+  min-width: 0;
+}
+
+.exp-stat-label {
+  font-size: var(--fs-cap, 12.5px);
+  color: var(--dim-2, var(--dim, #7a7a7a));
+  letter-spacing: .02em;
+}
+
+.exp-stat-value {
+  margin-top: 3px;
+  font-size: 24px;
+  font-weight: 650;
+  line-height: 1.18;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.exp-stat-sub {
+  margin-top: 5px;
+  min-height: 17px;
+  font-size: 11.5px;
+  line-height: 1.5;
+  color: var(--dim-2, var(--dim, #7a7a7a));
+}
+
+.exp-actions {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 15px 16px;
+}
+
+.exp-actions-btns {
+  display: flex;
+  gap: 8px;
+}
+
+.exp-actions-btns .btn {
+  flex: 1;
+  white-space: nowrap;
+  padding-left: 8px;
+  padding-right: 8px;
+}
+
+.exp-actions-note {
+  font-size: 11.5px;
+  line-height: 1.6;
+  color: var(--dim-2, var(--dim, #7a7a7a));
+}
+
+.exp-list-card {
+  padding: 14px 18px 10px;
+}
+
+.exp-list-head {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--ui-line, rgba(0, 0, 0, .09));
+}
+
+.exp-list-title {
+  font-size: 15px;
+  font-weight: 650;
+  white-space: nowrap;
+}
+
+.exp-filters {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.exp-count {
+  margin-left: auto;
+  font-size: 12px;
+  color: var(--dim-2, var(--dim, #7a7a7a));
+  white-space: nowrap;
+}
+
+.exp-groups {
+  padding-top: 2px;
+}
+
+.exp-group {
+  margin-top: 16px;
+}
+
+.exp-group-head {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  padding: 0 0 7px;
+  border-bottom: 1px solid var(--ui-line, rgba(0, 0, 0, .09));
+}
+
+.exp-group-head h3 {
+  margin: 0;
+  font-size: 13.5px;
+  font-weight: 650;
+}
+
+.exp-group-head span {
+  font-size: 12px;
+  color: var(--dim-2, var(--dim, #7a7a7a));
+  font-variant-numeric: tabular-nums;
+}
+
+.exp-row {
+  display: grid;
+  grid-template-columns: 92px minmax(0, 1fr) 62px 104px auto;
+  gap: 10px;
+  align-items: center;
+  min-height: 42px;
+  padding: 8px 0;
+  border-bottom: 1px solid var(--ui-line, rgba(0, 0, 0, .07));
+}
+
+.exp-group .exp-row:last-child {
+  border-bottom: 0;
+}
+
+.exp-date {
+  font-size: 12px;
+  color: var(--dim-2, var(--dim, #7a7a7a));
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+.exp-date span {
+  opacity: .8;
+}
+
+.exp-title {
+  min-width: 0;
+  font-size: 14px;
+  font-weight: 500;
+  overflow-wrap: anywhere;
+}
+
+.exp-cat {
+  justify-self: start;
+  padding: 2px 8px;
+  border-radius: 999px;
+  font-size: 11.5px;
+  line-height: 1.5;
+  white-space: nowrap;
+}
+
+.exp-cat-food { color: #b65a3f; background: rgba(224, 122, 95, .15); }
+.exp-cat-traffic { color: #3f66a8; background: rgba(91, 141, 239, .15); }
+.exp-cat-shopping { color: #8552a1; background: rgba(176, 122, 204, .16); }
+.exp-cat-other { color: #656d7f; background: rgba(139, 147, 167, .16); }
+
+.exp-amount {
+  justify-self: end;
+  font-size: 14px;
+  font-weight: 650;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+.exp-row-actions {
+  display: flex;
+  gap: 6px;
+  justify-content: flex-end;
+}
+
+.exp-row-actions .btn {
+  white-space: nowrap;
+}
+
+.exp-del {
+  color: #b4463c;
+}
+
+.exp-more {
+  display: flex;
+  justify-content: center;
+  padding: 16px 0 8px;
+}
+
+@media (max-width: 1000px) {
+  .exp-top {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .exp-actions {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .exp-actions-btns {
+    flex: 0 0 auto;
+  }
+
+  .exp-actions-note {
+    text-align: right;
+  }
+}
+
+@media (max-width: 700px) {
+  .exp-summary {
+    gap: 10px;
+  }
+
+  .exp-stat {
+    padding: 12px 13px;
+  }
+
+  .exp-stat-value {
+    font-size: 20px;
+  }
+
+  .exp-list-card {
+    padding: 12px 14px 8px;
+  }
+
+  .exp-row {
+    grid-template-columns: 62px minmax(0, 1fr) auto;
+    grid-template-areas:
+      "date title amount"
+      "date cat actions";
+    gap: 5px 9px;
+    padding: 9px 0;
+  }
+
+  .exp-date { grid-area: date; align-self: start; padding-top: 1px; }
+  .exp-title { grid-area: title; }
+  .exp-cat { grid-area: cat; }
+  .exp-amount { grid-area: amount; }
+  .exp-row-actions { grid-area: actions; }
+  .exp-count { margin-left: 0; white-space: normal; }
+}
+
+@media (max-width: 520px) {
+  .exp-top,
+  .exp-page {
+    gap: 12px;
+  }
+
+  .exp-summary {
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+
+  .exp-stat {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: baseline;
+    column-gap: 10px;
+  }
+
+  .exp-stat-label { grid-column: 1; }
+  .exp-stat-value { grid-column: 2; grid-row: 1 / span 2; font-size: 19px; margin-top: 0; }
+  .exp-stat-sub { grid-column: 1; }
+
+  .exp-actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .exp-actions-note {
+    text-align: left;
+  }
+
+  .exp-actions-btns .btn {
+    flex: 1;
+  }
+
+  .exp-list-head {
+    gap: 8px;
+  }
+
+  .exp-list-title {
+    width: 100%;
+  }
+
+  .exp-row-actions .btn {
+    padding: 4px 7px;
+    font-size: 11.5px;
+  }
+}
+
+/* ========================= v1.6.1 视觉打磨 =========================
+   三张汇总卡带一点渐变与数字底纹，月份分组头吸顶，行悬停给反馈。
+   跟日程表、总览同一套奶油玻璃语言，只改视觉不动栅格。 */
+.exp-stat {
+  background: linear-gradient(176deg, rgba(var(--card-rgb), .72), rgba(var(--card-rgb), .34));
+  position: relative;
+  overflow: hidden;
+}
+.exp-stat::after {
+  content: '';
+  position: absolute;
+  right: -22px;
+  top: -30px;
+  width: 96px;
+  height: 96px;
+  border-radius: 50%;
+  background: radial-gradient(circle, color-mix(in srgb, var(--accent) 26%, transparent), transparent 70%);
+  pointer-events: none;
+}
+.exp-stat-value { font-size: 26px; letter-spacing: -.02em; }
+.exp-actions {
+  background: linear-gradient(176deg, rgba(var(--card-rgb), .66), rgba(var(--card-rgb), .3));
+}
+
+/* 月份分组头吸顶：翻长列表时永远知道自己在哪个月 */
+.exp-group-head {
+  position: sticky;
+  top: 0;
+  z-index: 2;
+  margin: 0 -18px;
+  padding: 6px 18px 7px;
+  background: rgba(var(--card-rgb), .93);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--ui-line);
+}
+.exp-group-head h3 { font-size: 14px; }
+.exp-group-head span {
+  padding: 1px 8px;
+  border-radius: 999px;
+  background: rgba(var(--overlay-rgb), .42);
+  font-variant-numeric: tabular-nums;
+}
+
+.exp-row { transition: background .15s ease; border-radius: 10px; }
+.exp-row:hover { background: rgba(var(--overlay-rgb), .3); }
+.exp-amount { color: var(--text); }
+
+.exp-cat { font-weight: 600; letter-spacing: .01em; }
+.exp-filters .chip.on,
+.exp-filters .chip.active { box-shadow: 0 2px 8px color-mix(in srgb, var(--accent) 32%, transparent); }
+
+@media (max-width: 700px) {
+  .exp-group-head { margin: 0 -14px; padding: 5px 14px 6px; }
+  .exp-stat-value { font-size: 21px; }
+}
+
+
+/* v1.6.1 手机端：三张汇总卡压一压高度，别把第一笔记录顶到整屏之外 */
+@media (max-width: 520px) {
+  .exp-stat { padding: 10px 12px; }
+  .exp-stat-value { font-size: 18px; }
+  .exp-stat-sub { font-size: 10.5px; }
+}
+
+
+/* v1.6.1 手机端：三张汇总卡并成一行（原来竖排三块吃掉 300px，
+   第一笔记录被顶到整屏之外）。宽度不够时数值缩到 15.5px，金额照样完整。 */
+@media (max-width: 520px) {
+  .exp-summary { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; }
+  .exp-stat { display: block; min-width: 0; padding: 9px 10px; border-radius: 14px; }
+  .exp-stat-label { font-size: 10.5px; }
+  .exp-stat-value { font-size: 15.5px; margin-top: 2px; letter-spacing: -.012em; }
+  .exp-stat-sub { font-size: 9.5px; }
+}
+
+/* v1.6.2 圆角统一：大卡 22px，小控件胶囊 999px，行内按钮 12px。
+   只改圆角，不动布局、颜色与间距。 */
+.exp-stat,
+.exp-actions,
+.exp-list-card {
+  border-radius: 22px;
+}
+.exp-page .btn,
+.exp-page .chip {
+  border-radius: 999px;
+}
+.exp-cat {
+  border-radius: 999px;
+}
+.exp-row-actions .btn {
+  border-radius: 12px;
+}
+.exp-row {
+  border-radius: 12px;
+}

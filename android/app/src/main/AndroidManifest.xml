@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:hardwareAccelerated="true"
+        android:usesCleartextTraffic="true"
+        android:theme="@style/AppTheme">
+
+        <activity
+            android:configChanges="orientation|keyboardHidden|keyboard|screenSize|locale|smallestScreenSize|screenLayout|uiMode"
+            android:name=".MainActivity"
+            android:label="@string/title_activity_main"
+            android:theme="@style/AppTheme.NoActionBarLaunch"
+            android:launchMode="singleTask"
+            android:exported="true">
+
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+
+        </activity>
+
+        <!-- 桌面小组件：桌面上直接看今天要做什么、直接点掉 -->
+        <receiver
+            android:name=".TaskWidgetProvider"
+            android:label="@string/widget_name"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/widget_shixu_info" />
+        </receiver>
+
+        <receiver
+            android:name=".WidgetActionReceiver"
+            android:exported="false" />
+
+        <!-- 小组件里的列表（装不下时可滚动） -->
+        <service
+            android:name=".WidgetService"
+            android:permission="android.permission.BIND_REMOTEVIEWS"
+            android:exported="false" />
+
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="${applicationId}.fileprovider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_paths"></meta-data>
+        </provider>
+    </application>
+
+    <!-- Permissions -->
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <!-- 访问局域网里的同步服务（http，非 https，所以还需要上面的 usesCleartextTraffic） -->
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
+    <!-- 本地通知：Android 13 起需要运行时授权 -->
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+    <!-- 精确到分钟的提醒（待办截止前 N 分钟） -->
+    <uses-permission android:name="android.permission.SCHEDULE_EXACT_ALARM" />
+    <uses-permission android:name="android.permission.USE_EXACT_ALARM" />
+    <!-- 息屏时也能按时弹出 -->
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <!-- 重启后重建已排期的提醒 -->
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+</manifest>
